@@ -39,7 +39,7 @@ def authenticate_user(db: Session, email: str, password: str):
     user = get_user_by_email(db, email)
     if not user:
         return None
-    if not verify_password(password, user.password):
+    if not verify_password(password, user.password): # type: ignore
         return None
     return user
 

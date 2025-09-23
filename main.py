@@ -50,22 +50,22 @@ def read_profile(current_user: models.User = Depends(get_current_user)):
 def create_task(task: schemas.TaskCreate, 
                 db: Session = Depends(get_db),
                 current_user: models.User = Depends(get_current_user)):
-    return crud.create_task(db, task, current_user.user_id)
+    return crud.create_task(db, task, current_user.user_id) # type: ignore
 
 @app.get("/tasks", response_model=List[schemas.Task])
 def list_tasks(db: Session = Depends(get_db),
                current_user: models.User = Depends(get_current_user)):
-    return crud.get_tasks(db, current_user.user_id)
+    return crud.get_tasks(db, current_user.user_id) # type: ignore
 
 @app.put("/tasks/{task_id}", response_model=schemas.Task)
 def update_task(task_id: int, task: schemas.TaskUpdate, 
                 db: Session = Depends(get_db),
                 current_user: models.User = Depends(get_current_user)):
-    return crud.update_task(db, task_id, task, current_user.user_id)
+    return crud.update_task(db, task_id, task, current_user.user_id) # type: ignore
 
 @app.delete("/tasks/{task_id}")
 def delete_task(task_id: int, 
                 db: Session = Depends(get_db),
                 current_user: models.User = Depends(get_current_user)):
-    crud.delete_task(db, task_id, current_user.user_id)
+    crud.delete_task(db, task_id, current_user.user_id) # type: ignore
     return {"detail": "Task deleted successfully"}
